@@ -1,0 +1,25 @@
+version: "3.0"
+services:
+  request-limit-server:
+    image: request-limit-server
+    restart: always
+    environment:
+      REDIS_URL: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: "a12345"
+      REDIS_DB: 0
+      APPLICATION_PORT: 8888
+      APPLICATION_MODE: "debug"
+      APPLICATION_TIMEOUT_WRITE: 1000
+      APPLICATION_TIMEOUT_READ: 1000
+      LIMIT_REQUEST: 60
+      LIMIT_RANGE_UNIT: "minute"
+      LIMIT_RANGE_PER: 1
+    ports:
+      - "8888:8888"
+  redis:
+    image: redis
+    restart: always
+    command: redis-server --requirepass a12345
+    ports:
+      - "6379"

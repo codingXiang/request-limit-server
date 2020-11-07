@@ -1,0 +1,5 @@
+limit:
+  request: 60
+  range:
+    unit: minute
+    per: 1
